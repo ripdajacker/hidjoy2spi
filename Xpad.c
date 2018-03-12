@@ -1,4 +1,5 @@
 #include <linux/joystick.h>
+#include <stdint.h>
 #include "Xpad.h"
 
 #define SRC_ORIGINAL_XPAD 0

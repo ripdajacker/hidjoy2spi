@@ -28,7 +28,10 @@ XpadReport_Data_t getLastReport(void) {
 }
 
 void handleRumble(XpadRumble_t *rumble) {
-    printf("Rumble! 0x%x 0x%x\n", rumble->left, rumble->right);
+    if (rumble->left | rumble->right) {
+        printf("Rumble! 0x%x 0x%x\n", rumble->left, rumble->right);
+    }
+
     lastRumble = rumble;
 }
 

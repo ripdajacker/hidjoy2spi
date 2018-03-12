@@ -3,10 +3,10 @@
 #include <fcntl.h>
 #include "SpiBus.h"
 #include "spi.h"
-#include "Xpad.h"
 
-int fd = -1;
-int running = 1;
+static int fd = -1;
+static int running = 1;
+static XpadRumble_t rumble;
 
 typedef struct {
     XpadReport_Data_t (*supplier)(void);
@@ -20,8 +20,6 @@ void *readWriteSpi(void *args) {
     spi_init(fd);
     while (running) {
         XpadReport_Data_t reportData = (holder->supplier)();
-        XpadRumble_t rumble;
-
         transfer(fd, (uint8_t *) &reportData, (uint8_t *) &rumble);
 
         (holder->callback)(&rumble);
@@ -32,7 +30,7 @@ void *readWriteSpi(void *args) {
 
 void startSpiThread(char *file, XpadReport_Data_t (*supplier)(void), void (*callback)(XpadRumble_t *)) {
     pthread_t threadId;
-    fd = open(file, O_RDONLY);
+    fd = open(file, O_RDWR);
 
     printf("\nOpening SPI: %s\n", file);
     if (fd == -1) {

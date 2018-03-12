@@ -50,7 +50,7 @@
 #define ARRAY_SIZE(a) (sizeof(a) / sizeof((a)[0]))
 //default spi buffer transmist/receive size.
 #ifndef SPI_BUFFER_SIZE
-	#define SPI_BUFFER_SIZE 100
+	#define SPI_BUFFER_SIZE 20
 #endif
 
 //for debugging purposes.

@@ -1,7 +1,3 @@
-//
-// Created by jesenko on 3/9/18.
-//
-
 #ifndef HID_SPI_REDIRECT_XPAD_H
 #define HID_SPI_REDIRECT_XPAD_H
 
@@ -55,4 +51,4 @@ typedef struct {
 
 void convertEventToReport(XpadReport_Data_t *dst, struct js_event *event);
 
-#endif //HID_SPI_REDIRECT_XPAD_H
+#endif
