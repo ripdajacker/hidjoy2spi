@@ -16,7 +16,7 @@ static XpadRumble_t *lastRumble;
 
 
 void onReadJoy(struct js_event *event) {
-    printf("value: %d, type: %d, number:%d\n", event->type, event->value, event->number);
+    printf("value: %d, type: %d, number:%d\n", event->value, event->type, event->number);
 
     pthread_mutex_lock(&mutex);
     convertEventToReport(&lastReport, event);
