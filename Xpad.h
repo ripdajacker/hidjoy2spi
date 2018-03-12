@@ -1,7 +1,7 @@
 #ifndef HID_SPI_REDIRECT_XPAD_H
 #define HID_SPI_REDIRECT_XPAD_H
 
-#include <unitypes.h>
+#include <stdint.h>
 
 typedef struct {
     uint8_t UNUSED_0;
