@@ -13,10 +13,11 @@ pthread_t threadId;
 void *readJoy(void *arg) {
     struct js_event e;
     void (*callback )(struct js_event *) = arg;
+    size_t structSize = sizeof(e);
     while (running) {
-        read(fd, &e, sizeof(e));
-
-        (*callback)(&e);
+        if (read(fd, &e, structSize) == structSize) {
+            (*callback)(&e);
+        }
     }
 }
 
