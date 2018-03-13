@@ -71,6 +71,7 @@ void handle360(XpadReport_Data_t *dst, struct js_event *event) {
 
         default:
             return;
+    }
 }
 
 void handleOriginalXbox(XpadReport_Data_t *dst, struct js_event *event) {
