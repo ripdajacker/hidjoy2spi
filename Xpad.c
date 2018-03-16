@@ -5,7 +5,11 @@
 #define SRC_ORIGINAL_XPAD 0
 #define SRC_XBOX_360      1
 
-uint8_t sourceType = SRC_ORIGINAL_XPAD;
+uint8_t sourceType = SRC_XBOX_360;
+
+long map(long x, long in_min, long in_max, long out_min, long out_max) {
+    return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+}
 
 void handle360(XpadReport_Data_t *dst, struct js_event *event) {
     switch (event->type) {
@@ -44,7 +48,7 @@ void handle360(XpadReport_Data_t *dst, struct js_event *event) {
                     dst->LEFT_STICK_X = event->value;
                     break;
                 case 2:
-                    dst->TRIGGER_LEFT = (uint8_t) (event->value & 0xFF);
+                    dst->TRIGGER_LEFT = (uint8_t) (map(event->value, -32767, 32767, 0, 255) & 0xFF);
                     break;
                 case 3:
                     dst->RIGHT_STICK_Y = event->value;
@@ -53,7 +57,7 @@ void handle360(XpadReport_Data_t *dst, struct js_event *event) {
                     dst->RIGHT_STICK_X = event->value;
                     break;
                 case 5:
-                    dst->TRIGGER_RIGHT = (uint8_t) (event->value & 0xFF);
+                    dst->TRIGGER_RIGHT = (uint8_t) (map(event->value, -32767, 32767, 0, 255) & 0xFF);
                     break;
                 case 6:
                     dst->DPAD_LEFT = (uint8_t) (event->value == -32767 ? 1 : 0);
