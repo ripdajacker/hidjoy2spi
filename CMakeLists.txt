@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.8)
+cmake_minimum_required(VERSION 3.7)
 project(hid_spi_redirect)
 
 set(CMAKE_C_STANDARD 99)
