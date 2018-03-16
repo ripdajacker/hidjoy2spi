@@ -79,7 +79,7 @@ int transfer(int fd, uint8_t *data, uint8_t *receive) {
             .tx_buf = (unsigned long) tx,
             .rx_buf = (unsigned long) rx,
             .len = SPI_BUFFER_SIZE,
-            .delay_usecs = 1,
+            .delay_usecs = 20,
             .speed_hz = spi_speed,
             .bits_per_word = spi_bits,
     };
