@@ -57,6 +57,12 @@ void *readWriteSpi(void *args) {
                 (holder->callback)(&rumble);
             }
         }
+
+        XpadReport_Data_t reportData = (holder->supplier)();
+        transfer(fd, (uint8_t *) &reportData, (uint8_t *) &rumble);
+
+        (holder->callback)(&rumble);
+        usleep(2000);
     }
 }
 
