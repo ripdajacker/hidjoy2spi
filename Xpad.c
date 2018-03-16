@@ -61,10 +61,10 @@ void handle360(XpadReport_Data_t *dst, struct js_event *event) {
         case JS_EVENT_AXIS: {
             switch (event->number) {
                 case 0:
-                    dst->LEFT_STICK_Y = event->value;
+                    dst->LEFT_STICK_X = event->value;
                     break;
                 case 1:
-                    dst->LEFT_STICK_X = event->value;
+                    dst->LEFT_STICK_Y = -event->value;
                     break;
                 case 2:
                     dst->TRIGGER_LEFT = map(event->value);
