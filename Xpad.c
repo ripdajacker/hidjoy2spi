@@ -70,10 +70,10 @@ void handle360(XpadReport_Data_t *dst, struct js_event *event) {
                     dst->TRIGGER_LEFT = map(event->value);
                     break;
                 case 3:
-                    dst->RIGHT_STICK_Y = event->value;
+                    dst->RIGHT_STICK_X = event->value;
                     break;
                 case 4:
-                    dst->RIGHT_STICK_X = event->value;
+                    dst->RIGHT_STICK_Y = -event->value;
                     break;
                 case 5:
                     dst->TRIGGER_RIGHT = map(event->value);
