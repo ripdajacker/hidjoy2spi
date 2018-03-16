@@ -1,12 +1,11 @@
 #include <stdio.h>
 #include <linux/input.h>
-#include <sys/ioctl.h>
 #include <linux/joystick.h>
 #include <pthread.h>
-#include <stdlib.h>
 #include "JoystickRead.h"
 #include "SpiBus.h"
-#include "Xpad.h"
+
+#define DEBUG 0
 
 pthread_mutex_t mutex;
 pthread_mutexattr_t mutexAttr;
@@ -14,9 +13,10 @@ pthread_mutexattr_t mutexAttr;
 static XpadReport_Data_t lastReport;
 static XpadRumble_t *lastRumble;
 
-
 void onReadJoy(struct js_event *event) {
-    printf("value: %d, type: %d, number:%d\n", event->value, event->type, event->number);
+    if (DEBUG) {
+        printf("value: %d, type: %d, number:%d\n", event->value, event->type, event->number);
+    }
 
     pthread_mutex_lock(&mutex);
     convertEventToReport(&lastReport, event);
@@ -28,8 +28,10 @@ XpadReport_Data_t getLastReport(void) {
 }
 
 void handleRumble(XpadRumble_t *rumble) {
-    if (rumble->left | rumble->right) {
-        printf("Rumble! 0x%x 0x%x\n", rumble->left, rumble->right);
+    if (DEBUG) {
+        if (rumble->left | rumble->right) {
+            printf("Rumble! 0x%x 0x%x\n", rumble->left, rumble->right);
+        }
     }
 
     lastRumble = rumble;
