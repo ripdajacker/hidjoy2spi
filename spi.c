@@ -2,7 +2,7 @@
 
 uint8_t spi_mode = 0;
 uint8_t spi_bits = 8;
-uint32_t spi_speed = 500000;
+uint32_t spi_speed = 1500000;
 
 void pabort(const char *s) {
     perror(s);
@@ -79,7 +79,7 @@ int transfer(int fd, uint8_t *data, uint8_t *receive) {
             .tx_buf = (unsigned long) tx,
             .rx_buf = (unsigned long) rx,
             .len = SPI_BUFFER_SIZE,
-            .delay_usecs = 0,
+            .delay_usecs = 10,
             .speed_hz = spi_speed,
             .bits_per_word = spi_bits,
     };
@@ -100,5 +100,4 @@ void spi_init(int fd) {
     spi_set_mode(fd, spi_mode);
     spi_set_word(fd, spi_bits);
     spi_set_speed(fd, spi_speed);
-    spi_set_delay(0);
 }

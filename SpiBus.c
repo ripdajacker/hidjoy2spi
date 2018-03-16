@@ -6,7 +6,6 @@
 #include "spi.h"
 
 static int fd = -1;
-static int gpioFd = -1;
 static int running = 1;
 static XpadRumble_t rumble;
 
@@ -16,53 +15,17 @@ typedef struct {
     void (*callback)(XpadRumble_t *);
 } t_supplier_and_callback;
 
-void initGpio(void) {
-    gpioFd = open("/sys/class/gpio/export", O_WRONLY);
-    write(gpioFd, "in", 2);
-    close(gpioFd);
-
-    gpioFd = open("/sys/class/gpio/gpio25/direction", O_WRONLY);
-    write(gpioFd, "in", 2);
-    close(gpioFd);
-
-    gpioFd = open("/sys/class/gpio/gpio25/edge", O_WRONLY);
-    write(gpioFd, "both", 4);
-    close(gpioFd);
-
-    gpioFd = open("/sys/class/gpio/gpio25/value", O_RDONLY);
-}
-
 void *readWriteSpi(void *args) {
     t_supplier_and_callback *holder = args;
 
     spi_init(fd);
 
-    initGpio();
-    struct pollfd polling;
-    polling.fd = gpioFd;
-    polling.events = POLLPRI;
-
     while (running) {
-        lseek(gpioFd, 0, SEEK_SET);
-        int gpioValue = poll(&polling, 1, 10);
-
-        char c;
-        read(gpioFd, &c, 1);
-
-        if (gpioValue > 0) {
-            if (c == '1') {
-                XpadReport_Data_t reportData = (holder->supplier)();
-                transfer(fd, (uint8_t *) &reportData, (uint8_t *) &rumble);
-
-                (holder->callback)(&rumble);
-            }
-        }
-
         XpadReport_Data_t reportData = (holder->supplier)();
         transfer(fd, (uint8_t *) &reportData, (uint8_t *) &rumble);
 
         (holder->callback)(&rumble);
-        usleep(2000);
+        usleep(1500);
     }
 }
 
