@@ -134,7 +134,7 @@ void handleOriginalXbox(XpadReport_Data_t *dst, struct js_event *event) {
                     dst->LEFT_STICK_X = event->value;
                     break;
                 case 2:
-                    dst->TRIGGER_LEFT = (uint8_t) (event->value & 0xFF);
+                    dst->TRIGGER_LEFT = map(event->value);
                     break;
                 case 3:
                     dst->RIGHT_STICK_Y = event->value;
@@ -143,7 +143,7 @@ void handleOriginalXbox(XpadReport_Data_t *dst, struct js_event *event) {
                     dst->RIGHT_STICK_X = event->value;
                     break;
                 case 5:
-                    dst->TRIGGER_RIGHT = (uint8_t) (event->value & 0xFF);
+                    dst->TRIGGER_RIGHT = map(event->value);
                     break;
                 case 6:
                     dst->DPAD_LEFT = (uint8_t) (event->value == -32767 ? 1 : 0);
