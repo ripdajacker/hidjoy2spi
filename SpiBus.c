@@ -4,6 +4,7 @@
 #include <poll.h>
 #include "SpiBus.h"
 #include "spi.h"
+#include "Xpad.h"
 
 static int fd = -1;
 static int running = 1;
@@ -22,6 +23,7 @@ void *readWriteSpi(void *args) {
 
     while (running) {
         XpadReport_Data_t reportData = (holder->supplier)();
+        reportData.LENGTH = 0x14;
         transfer(fd, (uint8_t *) &reportData, (uint8_t *) &rumble);
 
         (holder->callback)(&rumble);
