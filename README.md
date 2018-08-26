@@ -27,7 +27,7 @@ You need a Raspberry PI or other SPI-capable linux computer + an atmega32u4.
 
 3. Connect an Xbox One or wired 360 gamepad to the Raspberry (you will need an OTG adapter if it is a Raspberry Pi Zero).
 
-4. Flash the newest `XpadEmu.hex` from the [xpad-avr]() project (Windows users: use [AVRDUDESS](https://github.com/zkemble/AVRDUDESS), Linux/Mac users can use `avrdude`).
+4. Flash the newest `XpadEmu.hex` from the [xpad-avr](https://github.com/ripdajacker/xpad-avr/releases) project (Windows users: use [AVRDUDESS](https://github.com/zkemble/AVRDUDESS), Linux/Mac users can use `avrdude`).
 
 5. Run the hid2joy application like so:
 
