@@ -8,4 +8,6 @@
 
 void startSpiThread(char *file, XpadReport_Data_t (*supplier)(void), void (*callback)(XpadRumble_t *));
 
+void convertEventToPackedArray(uint8_t *dst, XpadReport_Data_t *src);
+
 #endif
