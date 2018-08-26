@@ -7,15 +7,15 @@ typedef struct {
     uint8_t UNUSED_0;
     uint8_t LENGTH; // always 0x14
 
-    uint8_t DPAD_UP;
-    uint8_t DPAD_DOWN;
-    uint8_t DPAD_LEFT;
-    uint8_t DPAD_RIGHT;
+    uint8_t DPAD_UP      :1;
+    uint8_t DPAD_DOWN    :1;
+    uint8_t DPAD_LEFT    :1;
+    uint8_t DPAD_RIGHT   :1;
 
-    uint8_t BUTTON_START;
-    uint8_t BUTTON_BACK;
-    uint8_t BUTTON_L3;
-    uint8_t BUTTON_R3;
+    uint8_t BUTTON_START :1;
+    uint8_t BUTTON_BACK  :1;
+    uint8_t BUTTON_L3    :1;
+    uint8_t BUTTON_R3    :1;
 
     uint8_t UNUSED_1;
 
